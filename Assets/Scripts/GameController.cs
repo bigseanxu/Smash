@@ -5,6 +5,7 @@ public class GameController : MonoBehaviour {
 	public Transform mCanvas;
 	public Transform mBallsEmitter;
 
+	bool gameStartPressed = false;
 	// Use this for initialization
 	void Start () {
 	
@@ -16,16 +17,23 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void StartGame() {
-		mCanvas.GetComponent<CanvasController> ().OnGameStart ();
+		if (!gameStartPressed) {
+			mCanvas.GetComponent<CanvasController> ().OnGameStart ();
+			gameStartPressed = true;
+		}
 	}
 
 	public void GameOver() {
-		mCanvas.GetComponent<CanvasController> ().OnGameOver ();
-		Game.status = 3;
+		if (Game.status == 1) {
+			mCanvas.GetComponent<CanvasController> ().OnGameOver ();
+			Game.status = 3;
+		}
+
 	}
 
 	public void GameRestart() {
 		mCanvas.GetComponent<CanvasController> ().OnGameRestart ();
+		mBallsEmitter.GetComponent<BallsEmitter> ().OnRestart();
 	}
 	
 }

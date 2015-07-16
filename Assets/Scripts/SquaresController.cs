@@ -14,6 +14,8 @@ public class SquaresController : MonoBehaviour {
 
 	public float mInterval = 0.2f;
 
+	int mCurrHeight = 3;
+
 	bool isSmashing;
 	void Start () {
 	
@@ -35,7 +37,7 @@ public class SquaresController : MonoBehaviour {
 		isSmashing = true;
 
 		Vector2 leftSqureDest = ((RectTransform)mLeft).anchoredPosition;
-		leftSqureDest.x = - ((RectTransform)mLeft).rect.width / 2.0f + 55-27.5f;
+		leftSqureDest.x = - ((RectTransform)mLeft).rect.width / 2.0f + 55 - 27.5f;
 		LeanTween.move ((RectTransform)mLeft, leftSqureDest, mSmashInTime).setEase((LeanTweenType)mSmashInEase).setOnComplete (OnSmashInComplete);
 
 		Vector2 rightSqureDest = ((RectTransform)mRight).anchoredPosition;
@@ -65,5 +67,10 @@ public class SquaresController : MonoBehaviour {
 
 	void OnSmashOutComplete() {
 		isSmashing = false;
+	}
+
+	public void LoseHeight() {
+		LeanTween.move ((RectTransform)mLeft.GetChild(mCurrHeight), new Vector2(- 500, 0), 1);
+		LeanTween.move ((RectTransform)mRight.GetChild(mCurrHeight), new Vector2(440 + 500, 0), 1);
 	}
 }

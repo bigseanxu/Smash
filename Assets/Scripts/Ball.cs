@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class Ball : MonoBehaviour {
 
 	float mVelocity;
@@ -10,28 +10,45 @@ public class Ball : MonoBehaviour {
 	public RectTransform mLeftSquare;
 	public Transform mGameController;
 	bool mIsStart = false;
-	public bool isBomb;
+	bool isBomb;
+	
+	public float mHorSpeed;
+	public float mG;
+
+	public Sprite mImageCrash;
 	// Use this for initialization
 	void Start () {
 		mIsStart = true;
 	}
 	
 	// Update is called once per frame
+	float t = 0;
 	void Update () {
-	//	if (Game.status == 1) {
-			if (mState == 2) {
-				return;
-			}
+		if (mState == 0) {
 			RectTransform rt = (RectTransform)transform;
 			Vector2 v = rt.anchoredPosition;
 			mDeltaY = mVelocity * Time.deltaTime;
 			v.y += mDeltaY;
 			((RectTransform)transform).anchoredPosition = v;
-			
 			if (v.y > 960) {
-				GameObject.Destroy(gameObject);
+				if (!isBomb) {
+					mState = 2;
+					mGameController.GetComponent<GameController> ().GameOver ();
+				}
 			}
-//		}
+		} else if (mState == 2) {
+			RectTransform rectTrans = (RectTransform)transform;
+			if (!isBomb) {
+				float t2 = t + Time.deltaTime;
+				float s = 0.5f * mG * (t2 * t2 - t * t);
+				t = t2;
+				Vector2 vec = rectTrans.anchoredPosition;
+				vec.x += mHorSpeed * Time.deltaTime;
+				vec.y += s;
+				rectTrans.anchoredPosition = vec;
+
+			}
+		}
 	}
 
 	void LateUpdate() {
@@ -68,6 +85,17 @@ public class Ball : MonoBehaviour {
 	}
 
 	public void OnCrash() {
+		if (!isBomb) {
+			GetComponent<Image>().sprite = mImageCrash;
+		}
 		mGameController.GetComponent<GameController> ().GameOver ();
+	}
+
+	public void SetIsBomb(bool bomb) {
+		isBomb = bomb;
+	}
+	
+	public bool IsBomb () {
+		return isBomb;
 	}
 }
