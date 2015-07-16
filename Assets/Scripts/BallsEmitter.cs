@@ -4,15 +4,30 @@ using UnityEngine.UI;
 public class BallsEmitter : MonoBehaviour {
 
 	public Transform mBallsContainer;
-	public float mInterval = 2f;
 	public Transform mPrefab;
-	public float mSpeed;
 	public Transform mGameController;
 	public RectTransform mLeftSquare;
-	public float mBombChance;
 	public Sprite mBomb;
+
+	float mTime = 0;
+	float mCurrWave = 0;
+	float mCurrWaveBallCount = 0;
+	float mCurrBallInWave = 0;
+	int mStatus = 0; // 0: not started, 1: started
 	// ball settings
 	public Vector3 mDefaultStartPosition;
+	public float mInterval = 2f;
+	public float mBombChance;
+	public float mSpeed;
+	public float mMinSpeed;
+	public float mMaxSpeed;
+	public float mMinWaveTime;
+	public float mMaxWaveTime;
+	public int mMinBallsPerWave;
+	public int mMaxBallsPerWave;
+	public float mIntervalBetweenWaves;
+	public float mMinIntervalBetweenBalls;
+	public float mMaxIntervalBetweenBalls;
 
 
 	// Use this for initialization
@@ -22,25 +37,39 @@ public class BallsEmitter : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
 
 	public void StartEmitting() {
+		StartCoroutine (StartWave());
+	}
+
+	IEnumerator StartWave() {
+		print ("curr wave = " + mCurrWave);
+		mCurrWaveBallCount = Random.Range (mMinBallsPerWave, mMaxBallsPerWave);
 		StartCoroutine (Emit ());
+		yield return null;
 	}
 
 	IEnumerator EmitDelay() {
 		yield return new WaitForSeconds (1);
-		StartCoroutine (Emit());
+
 	}
 
 	IEnumerator Emit() {
+		if (mCurrBallInWave == mCurrWaveBallCount) {
+			yield return new WaitForSeconds(mIntervalBetweenWaves);
+			mCurrWave++;
+			StartCoroutine(StartWave());
+			yield return null;
+		}
+
 		RectTransform ball = ((RectTransform)GameObject.Instantiate (mPrefab, Vector3.zero, Quaternion.Euler(0, 0, Random.Range(0, 360))));
 		ball.SetParent (mBallsContainer);
 		ball.localScale = Vector3.one;
 		ball.anchoredPosition3D = mDefaultStartPosition;
-		ball.GetComponent<Ball> ().SetVelocity(mSpeed);
+		ball.GetComponent<Ball> ().SetVelocity(Random.Range(mMinSpeed, mMaxSpeed));
 		ball.GetComponent<Ball> ().mGameController = mGameController;
 		ball.GetComponent<Ball> ().mLeftSquare = mLeftSquare;
 
@@ -50,7 +79,9 @@ public class BallsEmitter : MonoBehaviour {
 			ball.GetComponent<Image>().sprite = mBomb;
 		}
 
-		yield return new WaitForSeconds (mInterval);
+		mCurrBallInWave++;
+
+		yield return new WaitForSeconds (Random.Range(mMinIntervalBetweenBalls, mMaxIntervalBetweenBalls));
 
 		if (Game.status == 1) {
 			StartCoroutine (Emit());
