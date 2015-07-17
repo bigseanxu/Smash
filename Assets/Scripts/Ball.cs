@@ -11,6 +11,7 @@ public class Ball : MonoBehaviour {
 	public Transform mGameController;
 	bool mIsStart = false;
 	bool isBomb;
+	int mChickType = 0;// 0: yellow 1: blue 2: green 3: duck
 	
 	public float mHorSpeed;
 	public float mG;
@@ -80,6 +81,7 @@ public class Ball : MonoBehaviour {
 		if (isBomb) {
 			mGameController.GetComponent<GameController> ().GameOver ();
 		} else {
+			Game.CurrentScore++;
 			GameObject.Destroy (gameObject);
 		}
 	}

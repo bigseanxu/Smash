@@ -8,7 +8,9 @@ public class GameController : MonoBehaviour {
 	bool gameStartPressed = false;
 	// Use this for initialization
 	void Start () {
-	
+		Game.HighScore = PlayerPrefs.GetInt ("best", 0);
+		Game.CurrentScore = 0;
+		Game.NewBest = false;
 	}
 	
 	// Update is called once per frame
@@ -26,14 +28,27 @@ public class GameController : MonoBehaviour {
 	public void GameOver() {
 		if (Game.status == 1) {
 			mCanvas.GetComponent<CanvasController> ().OnGameOver ();
+			if (Game.CurrentScore > Game.HighScore) {
+				PlayerPrefs.SetInt("best", Game.CurrentScore);
+				Game.NewBest = true;
+			} else {
+				Game.NewBest = false;
+			}
 			Game.status = 3;
 		}
-
 	}
 
 	public void GameRestart() {
 		mCanvas.GetComponent<CanvasController> ().OnGameRestart ();
 		mBallsEmitter.GetComponent<BallsEmitter> ().OnRestart();
+		Game.CurrentScore = 0;
+		if (Game.NewBest) {
+			Game.HighScore = PlayerPrefs.GetInt("best");
+		}
+	}
+
+	public void Reload() {
+		Application.LoadLevel (0);
 	}
 	
 }

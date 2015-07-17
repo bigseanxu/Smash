@@ -13,7 +13,7 @@ public class CanvasController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		print (mGameElement.anchoredPosition);
-		mGameElement.anchoredPosition = new Vector2 (1240, 0);
+		mGameElement.anchoredPosition = new Vector2 (1400, 0);
 	}
 	
 	// Update is called once per frame
@@ -22,7 +22,7 @@ public class CanvasController : MonoBehaviour {
 	}
 
 	public void OnGameStart() {
-		LeanTween.move (mStartPage, new Vector2 (-1240, 0), 0.5f).setEase(LeanTweenType.easeInCubic).setOnComplete (OnGameStartTweenComplete);
+		LeanTween.move (mStartPage, new Vector2 (-1400, 0), 0.5f).setEase(LeanTweenType.easeInCubic).setOnComplete (OnGameStartTweenComplete);
 		LeanTween.move (mGameElement, new Vector2(0, 0), 0.5f).setEase(LeanTweenType.easeInCubic);
 //		mStartPage.gameObject.SetActive (false);
 //		mGameElement.gameObject.SetActive (true);
@@ -30,15 +30,18 @@ public class CanvasController : MonoBehaviour {
 
 	public void OnGameOver() {
 		StartCoroutine (PlayGameOverAni());
+
 	}
 
 	IEnumerator PlayGameOverAni() {
 		yield return new WaitForSeconds (2);
 		LeanTween.move (mGameOver, new Vector2 (0, 0), 0.5f).setEase (LeanTweenType.easeInCubic).setOnComplete (OnGameOverTweenComplete);
+		mGameElement.GetComponent<GameElement> ().OnGameOver ();
 	}
 
 	public void OnGameRestart() {
 		LeanTween.move (mGameOver, new Vector2(1080, 0), 0.5f).setEase(LeanTweenType.easeInCubic).setOnComplete (OnGameRestartTweenComplete);
+
 	}
 
 	public void OnGameStartTweenComplete() {
@@ -53,6 +56,7 @@ public class CanvasController : MonoBehaviour {
 
 	public void OnGameRestartTweenComplete() {
 		mBallsEmitter.GetComponent<BallsEmitter> ().StartEmitting ();
+		mGameElement.GetComponent<GameElement> ().OnGameRestart ();
 		Game.status = 1;
 	}
 }

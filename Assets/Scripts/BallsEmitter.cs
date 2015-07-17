@@ -49,7 +49,7 @@ public class BallsEmitter : MonoBehaviour {
 	public void StartEmitting() {
 		if (mStatus != 1) {
 			mStatus = 1;
-			StartCoroutine (StartWave());
+			StartCoroutine (Emit ());
 		}
 	}
 
@@ -66,17 +66,6 @@ public class BallsEmitter : MonoBehaviour {
 	}
 
 	IEnumerator Emit() {
-		if (mCurrBallInWave == mCurrWaveBallCount) {
-			if (mCurrWave == mWaveToLoseHeight1 || mCurrWave == mWaveToLoseHeight2 || mCurrWave == mWaveToLoseHeight3) {
-				mSquaresController.GetComponent<SquaresController>().LoseHeight();
-			}
-
-			yield return new WaitForSeconds (mIntervalBetweenWaves);
-
-			mCurrWave++;
-			StartCoroutine (StartWave ());
-			yield return null;
-		} else {
 			RectTransform ball = ((RectTransform)GameObject.Instantiate (mPrefab, Vector3.zero, Quaternion.Euler(0, 0, Random.Range(0, 360))));
 			ball.SetParent (mBallsContainer);
 			ball.localScale = Vector3.one;
@@ -98,8 +87,6 @@ public class BallsEmitter : MonoBehaviour {
 			if (Game.status == 1) {
 				StartCoroutine (Emit());
 			}
-
-		}
 	}
 
 	public void OnPause () {

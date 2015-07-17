@@ -18,7 +18,7 @@ public class SquaresController : MonoBehaviour {
 
 	bool isSmashing;
 	void Start () {
-	
+
 	}
 
 	void Update () {
@@ -70,7 +70,23 @@ public class SquaresController : MonoBehaviour {
 	}
 
 	public void LoseHeight() {
-		LeanTween.move ((RectTransform)mLeft.GetChild(mCurrHeight), new Vector2(- 500, 0), 1);
-		LeanTween.move ((RectTransform)mRight.GetChild(mCurrHeight), new Vector2(440 + 500, 0), 1);
+		if (mCurrHeight == 0) {
+			return;
+		}
+		LeanTween.move ((RectTransform)mLeft.GetChild(mCurrHeight), new Vector2(-2000, 0), 1);
+		LeanTween.move ((RectTransform)mRight.GetChild(mCurrHeight), new Vector2(2000, 0), 1);
+		Vector2 vec = mLeft.sizeDelta;
+		vec.y -= 84;
+		mLeft.sizeDelta = vec;
+		mCurrHeight -= 1;
+
+	}
+
+	public void RetainHeight() {
+		mLeft.sizeDelta = new Vector2(198, 396);
+		for (int i = mCurrHeight; i < 3; i++) {
+			LeanTween.move ((RectTransform)mLeft.GetChild(i), new Vector2(-55, 0), 1);
+			LeanTween.move ((RectTransform)mRight.GetChild(i), new Vector2(55, 0), 1);
+		}
 	}
 }
