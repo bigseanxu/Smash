@@ -97,7 +97,7 @@ public class GameCenter : MonoBehaviour {
 		//shareWithFacebook ("title can be modified", "message can be modified");
 		//CaptureAPicureAsync ();
 		//Debug.Log ("facebook button is clicked.");
-		int point = PlayerPrefs.GetInt ("current");
+		int point = PlayerPrefs.GetInt ("best");
 		
 		#if UNITY_IPHONE
 		shareWithFacebook ("Facebook", ""+point);
@@ -114,7 +114,7 @@ public class GameCenter : MonoBehaviour {
 		//shareWithTwitter ("title can be modified", "message can be modified");
 		//type = ShareType.Twitter;
 		//CaptureAPicureAsync ();
-		int point = PlayerPrefs.GetInt ("current");
+		int point = PlayerPrefs.GetInt ("best");
 		#if UNITY_IPHONE
 		shareWithTwitter ("Twitter", "Wind Dodge!  I scored " + point + " points. Can you beat me? #winddodge");
 		#elif UNITY_ANDROID
@@ -131,6 +131,10 @@ public class GameCenter : MonoBehaviour {
 		PlayGamesPlatform.Instance.ShowLeaderboardUI("CgkIt5fH8s4EEAIQBw");
 		#elif UNITY_IPHONE
 		Social.ShowLeaderboardUI ();
+		if(Game.HighScore<Game.CurrentScore){
+			ReportScore(Game.CurrentScore);
+		}
+		ReportAchi();
 		//Social.ShowAchievementsUI();
 		#endif
 	}
@@ -162,7 +166,7 @@ public class GameCenter : MonoBehaviour {
 			});
 		}*/
 
-
+		//if里面要写上成就的上报条件
 		if (true) {
 			_ReportAchievement ("30smasher", 100.0f);
 		}
