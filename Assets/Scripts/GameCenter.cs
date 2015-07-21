@@ -84,12 +84,13 @@ public class GameCenter : MonoBehaviour {
 			Debug.Log ("Got " + achievements.Length + " achievements");
 		
 		// You can also call into the functions like this
-		Social.ReportProgress ("30smasher", 100.0f, result => {
+		/*Social.ReportProgress ("30smasher", 100.0f, result => {
 			if (result)
 				Debug.Log ("Successfully reported achievement progress");
 			else
 				Debug.Log ("Failed to report achievement");
-		});
+		});*/
+		ReportAchi();
 	}
 
 	public void OnFacebookShare() {
@@ -131,9 +132,7 @@ public class GameCenter : MonoBehaviour {
 		PlayGamesPlatform.Instance.ShowLeaderboardUI("CgkIt5fH8s4EEAIQBw");
 		#elif UNITY_IPHONE
 		Social.ShowLeaderboardUI ();
-		if(Game.HighScore<Game.CurrentScore){
-			ReportScore(Game.CurrentScore);
-		}
+
 		ReportAchi();
 		//Social.ShowAchievementsUI();
 		#endif
@@ -148,11 +147,11 @@ public class GameCenter : MonoBehaviour {
 	}
 	
 	public void ReportScore(long score) {
-		string id="point";
+		string id="Point";
 		#if UNITY_ANDROID
 		id = "CgkIt5fH8s4EEAIQBw";
 		#elif UNITY_IPHONE
-		id = "point";
+		id = "Point";
 		#endif
 		Social.ReportScore (score, id, success => {
 			Debug.Log(success ? "Reported score successfully" : "Failed to report score");
@@ -160,17 +159,22 @@ public class GameCenter : MonoBehaviour {
 	}
 	public void ReportAchi(){
 
-		/*if (true) {
-			Social.ReportScore (2000, "smasher", success => {
+		if (true) {
+			Social.ReportScore (PlayerPrefs.GetInt ("best", 0), "Point", success => {
 				Debug.Log (success ? "Reported score successfully" : "Failed to report score");
 			});
-		}*/
-
-		//if里面要写上成就的上报条件
-		if (true) {
-			_ReportAchievement ("30smasher", 100.0f);
 		}
 
+		//if里面要写上成就的上报条件
+		if (Game.HighScore>=30) {
+			_ReportAchievement ("30_", 100.0f);
+		}
+		if (Game.HighScore>=50) {
+			_ReportAchievement ("50", 100.0f);
+		}
+		if (Game.HighScore>=80) {
+			_ReportAchievement ("80", 100.0f);
+		}
 	}
 
 	public void GiveScore(){
