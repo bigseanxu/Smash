@@ -29,6 +29,7 @@ public class Ball : MonoBehaviour {
 	public ParticleSystem mSmokeParticle;
 
 	public RectTransform mBombBomb;
+	public RectTransform mNoUI;
 	// Use this for initialization
 	void Start () {
 		mIsStart = true;
@@ -58,6 +59,7 @@ public class Ball : MonoBehaviour {
 					mCrashParticle.gameObject.SetActive (true);
 					mCrashParticle.Play ();
 					mGameController.GetComponent<GameController> ().GameOver ();
+					mNoUI.GetComponent<Animator>().Play("GameElementVibrate", -1, 0);
 				}
 			}
 		} else if (mState == 2) {

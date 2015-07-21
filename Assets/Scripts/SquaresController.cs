@@ -113,5 +113,6 @@ public class SquaresController : MonoBehaviour {
 			LeanTween.alpha ((RectTransform)mLeft.GetChild(i), 1, 0.5f);
 			LeanTween.alpha ((RectTransform)mRight.GetChild(i), 1, 0.5f);
 		}
+		mCurrHeight = 3;
 	}
 }

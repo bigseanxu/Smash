@@ -11,6 +11,7 @@ public class BallsEmitter : MonoBehaviour {
 	public Sprite mBomb;
 	public ParticleSystem mBirthParticle;
 	public RectTransform mBombBomb;
+	public RectTransform mNoUI;
 	
 	float mTime = 0;
 	float mCurrWave = 0;
@@ -75,7 +76,7 @@ public class BallsEmitter : MonoBehaviour {
 		ball.GetComponent<Ball> ().SetVelocity(Random.Range(mMinSpeed, mMaxSpeed));
 		ball.GetComponent<Ball> ().mGameController = mGameController;
 		ball.GetComponent<Ball> ().mLeftSquare = mLeftSquare;
-		
+		ball.GetComponent<Ball> ().mNoUI = mNoUI;
 		float r = Random.value;
 		if (r < mBombChance) {
 			ball.GetComponent<Ball> ().SetIsBomb(true);
@@ -85,7 +86,9 @@ public class BallsEmitter : MonoBehaviour {
 			int chickType = ball.GetComponent<Ball> ().GetChick();
 			mBirthParticle.GetComponent<ParticleSystemRenderer>().material = ball.GetComponent<Ball>().mFeather[chickType];
 			mBirthParticle.gameObject.SetActive(true);
+			mBirthParticle.time = 0;
 			mBirthParticle.Play();
+
 		}
 
 
