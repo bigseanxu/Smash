@@ -9,7 +9,9 @@ public class BallsEmitter : MonoBehaviour {
 	public Transform mGameController;
 	public RectTransform mLeftSquare;
 	public Sprite mBomb;
-
+	public ParticleSystem mBirthParticle;
+	public RectTransform mBombBomb;
+	
 	float mTime = 0;
 	float mCurrWave = 0;
 	float mCurrWaveBallCount = 0;
@@ -49,7 +51,7 @@ public class BallsEmitter : MonoBehaviour {
 	public void StartEmitting() {
 		if (mStatus != 1) {
 			mStatus = 1;
-			StartCoroutine (Emit ());
+			StartCoroutine (EmitDelay ());
 		}
 	}
 
@@ -61,32 +63,40 @@ public class BallsEmitter : MonoBehaviour {
 	}
 
 	IEnumerator EmitDelay() {
-		yield return new WaitForSeconds (1);
-
+		yield return new WaitForSeconds (2);
+		StartCoroutine (Emit ());
 	}
 
 	IEnumerator Emit() {
-			RectTransform ball = ((RectTransform)GameObject.Instantiate (mPrefab, Vector3.zero, Quaternion.Euler(0, 0, Random.Range(0, 360))));
-			ball.SetParent (mBallsContainer);
-			ball.localScale = Vector3.one;
-			ball.anchoredPosition3D = mDefaultStartPosition;
-			ball.GetComponent<Ball> ().SetVelocity(Random.Range(mMinSpeed, mMaxSpeed));
-			ball.GetComponent<Ball> ().mGameController = mGameController;
-			ball.GetComponent<Ball> ().mLeftSquare = mLeftSquare;
-			
-			float r = Random.value;
-			if (r < mBombChance) {
-				ball.GetComponent<Ball> ().SetIsBomb(true);
-				ball.GetComponent<Image>().sprite = mBomb;
-			}
-			
-			mCurrBallInWave++;
-			
-			yield return new WaitForSeconds (Random.Range(mMinIntervalBetweenBalls, mMaxIntervalBetweenBalls));
-			
-			if (Game.status == 1) {
-				StartCoroutine (Emit());
-			}
+		RectTransform ball = ((RectTransform)GameObject.Instantiate (mPrefab, Vector3.zero, Quaternion.Euler(0, 0, Random.Range(0, 360))));
+		ball.SetParent (mBallsContainer);
+		ball.localScale = Vector3.one;
+		ball.anchoredPosition3D = mDefaultStartPosition;
+		ball.GetComponent<Ball> ().SetVelocity(Random.Range(mMinSpeed, mMaxSpeed));
+		ball.GetComponent<Ball> ().mGameController = mGameController;
+		ball.GetComponent<Ball> ().mLeftSquare = mLeftSquare;
+		
+		float r = Random.value;
+		if (r < mBombChance) {
+			ball.GetComponent<Ball> ().SetIsBomb(true);
+			ball.GetComponent<Image>().sprite = mBomb;
+			ball.GetComponent<Ball> ().mBombBomb = mBombBomb;
+		} else {
+			int chickType = ball.GetComponent<Ball> ().GetChick();
+			mBirthParticle.GetComponent<ParticleSystemRenderer>().material = ball.GetComponent<Ball>().mFeather[chickType];
+			mBirthParticle.gameObject.SetActive(true);
+			mBirthParticle.Play();
+		}
+
+
+		
+		mCurrBallInWave++;
+		
+		yield return new WaitForSeconds (Random.Range(mMinIntervalBetweenBalls, mMaxIntervalBetweenBalls));
+		
+		if (Game.status == 1) {
+			StartCoroutine (Emit());
+		}
 	}
 
 	public void OnPause () {

@@ -12,6 +12,10 @@ public class GameOverPage : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+	}
+
+	public void SetScore() {
 		mHighScore.GetComponent<ShowNumberInCanvas> ().SetNumber (Game.HighScore);
 		mYourScore.GetComponent<ShowNumberInCanvas> ().SetNumber (Game.CurrentScore);
 	}

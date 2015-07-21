@@ -4,13 +4,13 @@ using System.Collections;
 public class GameController : MonoBehaviour {
 	public Transform mCanvas;
 	public Transform mBallsEmitter;
+	public Transform mBackgroundMusic;
 
 	bool gameStartPressed = false;
 	// Use this for initialization
 	void Start () {
-		Game.HighScore = PlayerPrefs.GetInt ("best", 0);
-		Game.CurrentScore = 0;
-		Game.NewBest = false;
+
+		mBackgroundMusic.GetComponent<AudioSource> ().Play ();
 	}
 	
 	// Update is called once per frame

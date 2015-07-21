@@ -12,4 +12,8 @@ public class GameScore : MonoBehaviour {
 	void Update () {
 		GetComponent<ShowNumberInCanvas> ().SetNumber (Game.CurrentScore);
 	}
+
+	void OnEnable() {
+
+	}
 }

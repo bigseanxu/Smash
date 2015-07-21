@@ -93,7 +93,7 @@ public class GameGoogle : MonoBehaviour {
 	{
 		if (interstitial.IsLoaded())
 		{
-			print (time+" "+interval+" "+Game.status);
+			//print (time+" "+interval+" "+Game.status);
 			if (time > interval) {
 				interstitial.Show();
 				time = 0;

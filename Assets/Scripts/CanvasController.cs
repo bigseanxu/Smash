@@ -9,10 +9,13 @@ public class CanvasController : MonoBehaviour {
 
 	public GameController mGameController;
 	public Transform mBallsEmitter;
+
+	public Transform mPageSound;
 	
 	// Use this for initialization
 	void Start () {
-		print (mGameElement.anchoredPosition);
+		print ("canvas start");
+		Game.Init ();
 		mGameElement.anchoredPosition = new Vector2 (1400, 0);
 	}
 	
@@ -22,6 +25,7 @@ public class CanvasController : MonoBehaviour {
 	}
 
 	public void OnGameStart() {
+		mPageSound.GetComponent<AudioSource> ().Play ();
 		LeanTween.move (mStartPage, new Vector2 (-1400, 0), 0.5f).setEase(LeanTweenType.easeInCubic).setOnComplete (OnGameStartTweenComplete);
 		LeanTween.move (mGameElement, new Vector2(0, 0), 0.5f).setEase(LeanTweenType.easeInCubic);
 //		mStartPage.gameObject.SetActive (false);
@@ -30,16 +34,18 @@ public class CanvasController : MonoBehaviour {
 
 	public void OnGameOver() {
 		StartCoroutine (PlayGameOverAni());
-
+		mGameOver.GetComponent<GameOverPage> ().SetScore ();
 	}
 
 	IEnumerator PlayGameOverAni() {
 		yield return new WaitForSeconds (2);
+		mPageSound.GetComponent<AudioSource> ().Play ();
 		LeanTween.move (mGameOver, new Vector2 (0, 0), 0.5f).setEase (LeanTweenType.easeInCubic).setOnComplete (OnGameOverTweenComplete);
 		mGameElement.GetComponent<GameElement> ().OnGameOver ();
 	}
 
 	public void OnGameRestart() {
+		mPageSound.GetComponent<AudioSource> ().Play ();
 		LeanTween.move (mGameOver, new Vector2(1080, 0), 0.5f).setEase(LeanTweenType.easeInCubic).setOnComplete (OnGameRestartTweenComplete);
 
 	}

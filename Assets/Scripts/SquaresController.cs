@@ -6,11 +6,13 @@ public class SquaresController : MonoBehaviour {
 	public RectTransform mLeft;
 	public RectTransform mRight;
 	public Transform mJudge;
+	public Transform mBallsEmitter;
 
 	public float mSmashInTime = 0.1f;
 	public float mSmashOutTime = 0.5f;
 	public int mSmashInEase = (int) LeanTweenType.linear;
 	public int mSmashOutEase = (int) LeanTweenType.linear;
+	public Transform mCrashSound;
 
 	public float mInterval = 0.2f;
 
@@ -46,6 +48,7 @@ public class SquaresController : MonoBehaviour {
 	}
 
 	void OnSmashInComplete() {
+		mCrashSound.GetComponent<AudioSource> ().Play ();
 		StartCoroutine (SmashOutCoroutine());
 	}
 
@@ -66,15 +69,35 @@ public class SquaresController : MonoBehaviour {
 	}
 
 	void OnSmashOutComplete() {
+
 		isSmashing = false;
+		if (Game.status == 3) {
+			return;
+		}
+		BallsEmitter emitter = mBallsEmitter.GetComponent<BallsEmitter>();
+		if (mCurrHeight == 3 ) {
+			if (Game.CurrentScore == emitter.mWaveToLoseHeight1) {
+				LoseHeight();
+			}
+		} else if (mCurrHeight == 2) {
+			if (Game.CurrentScore == emitter.mWaveToLoseHeight2) {
+				LoseHeight();
+			}
+		} else if (mCurrHeight == 1) {
+			if (Game.CurrentScore == emitter.mWaveToLoseHeight3) {
+				LoseHeight();
+			}
+		}
 	}
 
 	public void LoseHeight() {
 		if (mCurrHeight == 0) {
 			return;
 		}
-		LeanTween.move ((RectTransform)mLeft.GetChild(mCurrHeight), new Vector2(-2000, 0), 1);
-		LeanTween.move ((RectTransform)mRight.GetChild(mCurrHeight), new Vector2(2000, 0), 1);
+		LeanTween.alpha ((RectTransform)mLeft.GetChild(mCurrHeight), 0, 0.5f);
+		LeanTween.alpha ((RectTransform)mRight.GetChild(mCurrHeight), 0, 0.5f);
+//		LeanTween.move ((RectTransform)mLeft.GetChild(mCurrHeight), new Vector2(-2000, 0), 1);
+//		LeanTween.move ((RectTransform)mRight.GetChild(mCurrHeight), new Vector2(2000, 0), 1);
 		Vector2 vec = mLeft.sizeDelta;
 		vec.y -= 84;
 		mLeft.sizeDelta = vec;
@@ -84,9 +107,11 @@ public class SquaresController : MonoBehaviour {
 
 	public void RetainHeight() {
 		mLeft.sizeDelta = new Vector2(198, 396);
-		for (int i = mCurrHeight; i < 3; i++) {
-			LeanTween.move ((RectTransform)mLeft.GetChild(i), new Vector2(-55, 0), 1);
-			LeanTween.move ((RectTransform)mRight.GetChild(i), new Vector2(55, 0), 1);
+		for (int i = mCurrHeight; i < 4; i++) {
+//			LeanTween.move ((RectTransform)mLeft.GetChild(i), new Vector2(-55, 0), 1);
+//			LeanTween.move ((RectTransform)mRight.GetChild(i), new Vector2(55, 0), 1);
+			LeanTween.alpha ((RectTransform)mLeft.GetChild(i), 1, 0.5f);
+			LeanTween.alpha ((RectTransform)mRight.GetChild(i), 1, 0.5f);
 		}
 	}
 }
