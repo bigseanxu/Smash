@@ -57,7 +57,7 @@ public class CanvasController : MonoBehaviour {
 
 	public void OnGameOverTweenComplete() {
 		mBallsEmitter.GetComponent<BallsEmitter> ().OnGameOver ();
-
+		mGameOver.GetComponent<GameOverPage> ().PlayNewBestSound ();
 	}
 
 	public void OnGameRestartTweenComplete() {

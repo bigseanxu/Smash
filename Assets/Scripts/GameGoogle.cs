@@ -42,7 +42,7 @@ public class GameGoogle : MonoBehaviour {
 		#elif UNITY_ANDROID
 		string adUnitId = "ca-app-pub-7896569660771969/4598629737";
 		#elif UNITY_IPHONE
-		string adUnitId = "ca-app-pub-7896569660771969/9168430136";
+		string adUnitId = "ca-app-pub-7896569660771969/8907844135";
 		#else
 		string adUnitId = "unexpected_platform";
 		#endif

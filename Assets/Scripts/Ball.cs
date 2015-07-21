@@ -30,6 +30,9 @@ public class Ball : MonoBehaviour {
 
 	public RectTransform mBombBomb;
 	public RectTransform mNoUI;
+	public Transform mBombSound;
+	public Transform mCrashSound;
+	public Transform mSmashSound;
 	// Use this for initialization
 	void Start () {
 		mIsStart = true;
@@ -60,6 +63,7 @@ public class Ball : MonoBehaviour {
 					mCrashParticle.Play ();
 					mGameController.GetComponent<GameController> ().GameOver ();
 					mNoUI.GetComponent<Animator>().Play("GameElementVibrate", -1, 0);
+					mCrashSound.GetComponent<AudioSource>().Play();
 				}
 			}
 		} else if (mState == 2) {
@@ -121,6 +125,7 @@ public class Ball : MonoBehaviour {
 			mSmashParticle.gameObject.SetActive(true);
 			mSmashParticle.Play();
 			GetComponent<Image>().color = new Color(0, 0, 0, 0);
+			mSmashSound.GetComponent<AudioSource>().Play();
 			//GameObject.Destroy (gameObject);
 		}
 		mState = 1;
@@ -133,6 +138,7 @@ public class Ball : MonoBehaviour {
 			GetComponent<Image> ().sprite = mImageCrash [mChickType];
 			mCrashParticle.gameObject.SetActive (true);
 			mCrashParticle.Play ();
+			mCrashSound.GetComponent<AudioSource>().Play();
 		} else {
 			BombBomb();
 			GetComponent<Image>().color = Vector4.zero;
@@ -172,7 +178,7 @@ public class Ball : MonoBehaviour {
 	}
 
 	void BombBomb() {
-
+		mBombSound.GetComponent<AudioSource> ().Play ();	
 		mBombBomb.transform.position = transform.position;
 		mBombBomb.GetComponent<BombBomb> ().Play ();
 	}

@@ -12,7 +12,11 @@ public class BallsEmitter : MonoBehaviour {
 	public ParticleSystem mBirthParticle;
 	public RectTransform mBombBomb;
 	public RectTransform mNoUI;
-	
+	public Transform mEmitSound;
+	public Transform mBombSound;
+	public Transform mCrashSound;
+	public Transform mSmashSound;
+
 	float mTime = 0;
 	float mCurrWave = 0;
 	float mCurrWaveBallCount = 0;
@@ -82,17 +86,17 @@ public class BallsEmitter : MonoBehaviour {
 			ball.GetComponent<Ball> ().SetIsBomb(true);
 			ball.GetComponent<Image>().sprite = mBomb;
 			ball.GetComponent<Ball> ().mBombBomb = mBombBomb;
+			ball.GetComponent<Ball> ().mBombSound = mBombSound;
 		} else {
 			int chickType = ball.GetComponent<Ball> ().GetChick();
 			mBirthParticle.GetComponent<ParticleSystemRenderer>().material = ball.GetComponent<Ball>().mFeather[chickType];
 			mBirthParticle.gameObject.SetActive(true);
 			mBirthParticle.time = 0;
 			mBirthParticle.Play();
-
+			ball.GetComponent<Ball> ().mSmashSound = mSmashSound;
+			ball.GetComponent<Ball> ().mCrashSound = mCrashSound;
 		}
-
-
-		
+		mEmitSound.GetComponent<AudioSource> ().Play ();
 		mCurrBallInWave++;
 		
 		yield return new WaitForSeconds (Random.Range(mMinIntervalBetweenBalls, mMaxIntervalBetweenBalls));
