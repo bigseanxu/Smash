@@ -95,6 +95,8 @@ public class BallsEmitter : MonoBehaviour {
 			mBirthParticle.Play();
 			ball.GetComponent<Ball> ().mSmashSound = mSmashSound;
 			ball.GetComponent<Ball> ().mCrashSound = mCrashSound;
+
+
 		}
 		mEmitSound.GetComponent<AudioSource> ().Play ();
 		mCurrBallInWave++;

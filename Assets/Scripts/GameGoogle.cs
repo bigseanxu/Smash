@@ -16,10 +16,11 @@ public class GameGoogle : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//print (Game.status );
 		time += Time.deltaTime;
 		if (Game.status == 3) {
-			ShowInterstitial();
-
+			//ShowInterstitial();
+			interstitial.Show();
 		}
 	}
 	private AdRequest createAdRequest()
@@ -38,7 +39,7 @@ public class GameGoogle : MonoBehaviour {
 	private void RequestInterstitial()
 	{
 		#if UNITY_EDITOR
-		string adUnitId = "unused";
+		string adUnitId = "ca-app-pub-7896569660771969/8907844135";
 		#elif UNITY_ANDROID
 		string adUnitId = "ca-app-pub-7896569660771969/4598629737";
 		#elif UNITY_IPHONE

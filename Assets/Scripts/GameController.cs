@@ -23,11 +23,18 @@ public class GameController : MonoBehaviour {
 			mCanvas.GetComponent<CanvasController> ().OnGameStart ();
 			gameStartPressed = true;
 		}
+		PlayerPrefs.SetInt ("playtimes", ++Game.playtimes);
+
 	}
 
 	public void GameOver() {
 		if (Game.status == 1) {
 			mCanvas.GetComponent<CanvasController> ().OnGameOver ();
+			//Game.total+=Game.CurrentScore;
+
+
+
+			//print ("yellow chick = " + Game.yellow);
 			if (Game.CurrentScore > Game.HighScore) {
 				PlayerPrefs.SetInt("best", Game.CurrentScore);
 				Game.NewBest = true;
@@ -45,6 +52,7 @@ public class GameController : MonoBehaviour {
 		if (Game.NewBest) {
 			Game.HighScore = PlayerPrefs.GetInt("best");
 		}
+		PlayerPrefs.SetInt ("playtimes", ++Game.playtimes);
 	}
 
 	public void Reload() {

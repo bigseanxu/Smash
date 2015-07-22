@@ -144,6 +144,7 @@ public class GameCenter : MonoBehaviour {
 		//Social.ShowLeaderboardUI ();
 		Social.ShowAchievementsUI();
 		#endif
+		ReportAchi ();
 	}
 	
 	public void ReportScore(long score) {
@@ -164,16 +165,34 @@ public class GameCenter : MonoBehaviour {
 				Debug.Log (success ? "Reported score successfully" : "Failed to report score");
 			});
 		}
-
+		print (PlayerPrefs.GetInt ("total", 0));
 		//if里面要写上成就的上报条件
-		if (Game.HighScore>=30) {
-			_ReportAchievement ("30_", 100.0f);
-		}
+
 		if (Game.HighScore>=50) {
 			_ReportAchievement ("50", 100.0f);
 		}
-		if (Game.HighScore>=80) {
-			_ReportAchievement ("80", 100.0f);
+
+
+		if (PlayerPrefs.GetInt ("yellow",0) >= 300) {
+			_ReportAchievement ("300", 100.0f);
+		}
+		if (PlayerPrefs.GetInt ("duck",0) >= 500) {
+			_ReportAchievement ("_500", 100.0f);
+		}
+		if (PlayerPrefs.GetInt ("green",0) >= 500) {
+			_ReportAchievement ("500.", 100.0f);
+		}
+		if (PlayerPrefs.GetInt ("boom",0) >= 1000) {
+			_ReportAchievement ("1000_", 100.0f);
+		}
+		if (PlayerPrefs.GetInt ("playtimes",0) >= 100) {
+			_ReportAchievement ("100.", 100.0f);
+		}
+		if (PlayerPrefs.GetInt ("total",0) >= 1000) {
+			_ReportAchievement ("1000.", 100.0f);
+		}
+		if (PlayerPrefs.GetInt ("total",0) >= 10000) {
+			_ReportAchievement ("10000", 100.0f);
 		}
 	}
 

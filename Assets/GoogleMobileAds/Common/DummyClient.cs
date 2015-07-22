@@ -45,7 +45,7 @@ namespace GoogleMobileAds.Common
         }
 
         public void ShowInterstitial() {
-            Debug.Log("Dummy ShowInterstitial");
+//            Debug.Log("Dummy ShowInterstitial");
         }
 
         public void DestroyInterstitial() {

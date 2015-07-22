@@ -21,6 +21,13 @@ public class GameElement : MonoBehaviour {
 		mSquare.GetComponent<SquaresController> ().RetainHeight ();
 		mScore.gameObject.SetActive (false);
 		mStopButton.gameObject.SetActive (false);
+		Game.total+=Game.CurrentScore;
+		PlayerPrefs.SetInt("total",Game.total);
+		PlayerPrefs.SetInt("yellow",Game.yellow);
+		PlayerPrefs.SetInt("duck",Game.duck);
+		PlayerPrefs.SetInt("blue",Game.blue);
+		PlayerPrefs.SetInt("green",Game.green);
+		PlayerPrefs.SetInt("boom",Game.boom);
 	}
 
 	public void OnGameRestart() {

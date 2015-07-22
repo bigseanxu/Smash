@@ -160,19 +160,25 @@ public class Ball : MonoBehaviour {
 		Image image = GetComponent <Image> ();
 		if (r < 0.25f) {
 			mChickType = 0;
+			Game.yellow++;
+			print ("yellow " + Game.yellow);
+
 		} else if (r < 0.5f) {
 			mChickType = 1;
 			image.sprite = mImageNormal [1];
+			Game.duck++;
 		} else if (r < 0.75f) {
 			mChickType = 2;
 			image.sprite = mImageNormal [2];
 			mSmashParticle.GetComponent<ParticleSystemRenderer>().material = mFeather[2];
 			mCrashParticle.GetComponent<ParticleSystemRenderer>().material = mFeather[2];
+			Game.green++;
 		} else {
 			mChickType = 3;
 			image.sprite = mImageNormal [3];
 			mSmashParticle.GetComponent<ParticleSystemRenderer>().material = mFeather[3];
 			mCrashParticle.GetComponent<ParticleSystemRenderer>().material = mFeather[3];
+			Game.blue++;
 		}
 		return mChickType;
 	}
@@ -181,5 +187,6 @@ public class Ball : MonoBehaviour {
 		mBombSound.GetComponent<AudioSource> ().Play ();	
 		mBombBomb.transform.position = transform.position;
 		mBombBomb.GetComponent<BombBomb> ().Play ();
+		Game.boom++;
 	}
 }
