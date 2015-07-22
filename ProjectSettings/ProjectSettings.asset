@@ -5,18 +5,18 @@ PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
   AndroidProfiler: 0
-  defaultScreenOrientation: 4
+  defaultScreenOrientation: 0
   targetDevice: 2
   targetGlesGraphics: -1
   targetIOSGraphics: -1
   targetResolution: 0
   accelerometerFrequency: 60
   companyName: cooee
-  productName: smashchick
+  productName: Smash Chick
   cloudProjectId: 
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
-  m_ShowUnitySplashScreen: 1
+  m_ShowUnitySplashScreen: 0
   defaultScreenWidth: 1024
   defaultScreenHeight: 768
   defaultScreenWidthWeb: 960
@@ -33,9 +33,9 @@ PlayerSettings:
   iosAppInBackgroundBehavior: 0
   displayResolutionDialog: 1
   allowedAutorotateToPortrait: 1
-  allowedAutorotateToPortraitUpsideDown: 1
-  allowedAutorotateToLandscapeRight: 1
-  allowedAutorotateToLandscapeLeft: 1
+  allowedAutorotateToPortraitUpsideDown: 0
+  allowedAutorotateToLandscapeRight: 0
+  allowedAutorotateToLandscapeLeft: 0
   useOSAutorotation: 1
   use32BitDisplayBuffer: 1
   disableDepthAndStencilBuffers: 0
@@ -102,16 +102,25 @@ PlayerSettings:
   uIStatusBarHidden: 1
   uIExitOnSuspend: 0
   uIStatusBarStyle: 0
-  iPhoneSplashScreen: {fileID: 0}
-  iPhoneHighResSplashScreen: {fileID: 0}
-  iPhoneTallHighResSplashScreen: {fileID: 0}
-  iPhone47inSplashScreen: {fileID: 0}
-  iPhone55inPortraitSplashScreen: {fileID: 0}
-  iPhone55inLandscapeSplashScreen: {fileID: 0}
-  iPadPortraitSplashScreen: {fileID: 0}
-  iPadHighResPortraitSplashScreen: {fileID: 0}
-  iPadLandscapeSplashScreen: {fileID: 0}
-  iPadHighResLandscapeSplashScreen: {fileID: 0}
+  iPhoneSplashScreen: {fileID: 2800000, guid: 8dcdfc9985ea043f497f1464047f83e5, type: 3}
+  iPhoneHighResSplashScreen: {fileID: 2800000, guid: 8dcdfc9985ea043f497f1464047f83e5,
+    type: 3}
+  iPhoneTallHighResSplashScreen: {fileID: 2800000, guid: 8dcdfc9985ea043f497f1464047f83e5,
+    type: 3}
+  iPhone47inSplashScreen: {fileID: 2800000, guid: 8dcdfc9985ea043f497f1464047f83e5,
+    type: 3}
+  iPhone55inPortraitSplashScreen: {fileID: 2800000, guid: 8dcdfc9985ea043f497f1464047f83e5,
+    type: 3}
+  iPhone55inLandscapeSplashScreen: {fileID: 2800000, guid: 8dcdfc9985ea043f497f1464047f83e5,
+    type: 3}
+  iPadPortraitSplashScreen: {fileID: 2800000, guid: 8dcdfc9985ea043f497f1464047f83e5,
+    type: 3}
+  iPadHighResPortraitSplashScreen: {fileID: 2800000, guid: 8dcdfc9985ea043f497f1464047f83e5,
+    type: 3}
+  iPadLandscapeSplashScreen: {fileID: 2800000, guid: 8dcdfc9985ea043f497f1464047f83e5,
+    type: 3}
+  iPadHighResLandscapeSplashScreen: {fileID: 2800000, guid: 8dcdfc9985ea043f497f1464047f83e5,
+    type: 3}
   iOSLaunchScreenType: 0
   iOSLaunchScreenPortrait: {fileID: 0}
   iOSLaunchScreenLandscape: {fileID: 0}
@@ -137,8 +146,26 @@ PlayerSettings:
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
-    - m_Icon: {fileID: 0}
+    - m_Icon: {fileID: 2800000, guid: 344425bd337334a3dae46329f217e018, type: 3}
       m_Size: 128
+  - m_BuildTarget: iPhone
+    m_Icons:
+    - m_Icon: {fileID: 2800000, guid: 336a899ec32e042a2881aecbcd626b7e, type: 3}
+      m_Size: 180
+    - m_Icon: {fileID: 2800000, guid: d4084c9dd555140608532cdb073f969c, type: 3}
+      m_Size: 152
+    - m_Icon: {fileID: 2800000, guid: ec461c3fcbdf743cda1cf847cd84fcf0, type: 3}
+      m_Size: 144
+    - m_Icon: {fileID: 2800000, guid: e6a3f02c635a54aeb84d215070953461, type: 3}
+      m_Size: 120
+    - m_Icon: {fileID: 2800000, guid: 2b5ee35a352ae408682e2410f0f79cf8, type: 3}
+      m_Size: 114
+    - m_Icon: {fileID: 2800000, guid: 1cb85af1c51064a9885b48ffe06e21df, type: 3}
+      m_Size: 76
+    - m_Icon: {fileID: 2800000, guid: 8bf67fc9d0b5146aeabf27394cc0d341, type: 3}
+      m_Size: 72
+    - m_Icon: {fileID: 2800000, guid: f3eac3ae9dbfd449fa7ef1f2c00e5d67, type: 3}
+      m_Size: 57
   m_BuildTargetBatching: []
   webPlayerTemplate: APPLICATION:Default
   m_TemplateCustomTags: {}
@@ -383,7 +410,7 @@ PlayerSettings:
   WebGL::audioCompressionFormat: 4
   WebGL::exceptionSupport: 0
   WebGL::memorySize: 256
-  iOS::Architecture: 0
+  iOS::Architecture: 2
   iOS::ScriptingBackend: 1
   boolPropertyNames:
   - WebGL::dataCaching
