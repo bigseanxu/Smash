@@ -16,12 +16,7 @@ public class GameGoogle : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//print (Game.status );
 		time += Time.deltaTime;
-		if (Game.status == 3) {
-			//ShowInterstitial();
-			interstitial.Show();
-		}
 	}
 	private AdRequest createAdRequest()
 	{

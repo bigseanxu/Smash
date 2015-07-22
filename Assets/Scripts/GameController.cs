@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour {
 	bool gameStartPressed = false;
 	// Use this for initialization
 	void Start () {
-
+		Application.targetFrameRate = 60;
 		mBackgroundMusic.GetComponent<AudioSource> ().Play ();
 	}
 	

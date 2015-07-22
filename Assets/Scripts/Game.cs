@@ -15,7 +15,7 @@ public static class Game
 	public static int boom = PlayerPrefs.GetInt ("boom", 0);
 	public static int playtimes = PlayerPrefs.GetInt ("playtimes", 0);
 	public static int total = PlayerPrefs.GetInt ("total", 0);
-
+	public static int CurrentColor = 5;
 	public static void Init() {
 		HighScore = PlayerPrefs.GetInt ("best", 0);
 		SoundSwitch = PlayerPrefs.GetInt ("sound", 1);

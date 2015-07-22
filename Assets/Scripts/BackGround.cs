@@ -14,6 +14,9 @@ public class BackGround : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (Game.CurrentScore == 0) {
+			mScoreCount = 0;
+		}
 		mScore = Game.CurrentScore;
 		if (mScore - mScoreCount == 10) {
 
@@ -24,8 +27,8 @@ public class BackGround : MonoBehaviour {
 
 			LeanTween.color((RectTransform)transform, mColors[mCurrColor], 1.5f).setEase(LeanTweenType.easeInOutCubic);
 			mScoreCount = mScore;
-			print (mColors[mCurrColor]);
-
+			//print (mColors[mCurrColor]);
+			Game.CurrentColor = mCurrColor;
 		}
 	}
 }

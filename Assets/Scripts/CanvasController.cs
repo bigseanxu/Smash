@@ -11,7 +11,8 @@ public class CanvasController : MonoBehaviour {
 	public Transform mBallsEmitter;
 
 	public Transform mPageSound;
-	
+	public Transform mGoogleAds;
+		
 	// Use this for initialization
 	void Start () {
 		print ("canvas start");
@@ -58,6 +59,7 @@ public class CanvasController : MonoBehaviour {
 	public void OnGameOverTweenComplete() {
 		mBallsEmitter.GetComponent<BallsEmitter> ().OnGameOver ();
 		mGameOver.GetComponent<GameOverPage> ().PlayNewBestSound ();
+		mGoogleAds.GetComponent<GameGoogle> ().ShowInterstitial ();
 	}
 
 	public void OnGameRestartTweenComplete() {

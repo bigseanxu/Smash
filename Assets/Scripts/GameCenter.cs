@@ -197,6 +197,6 @@ public class GameCenter : MonoBehaviour {
 	}
 
 	public void GiveScore(){
-		Application.OpenURL ("https://itunes.apple.com/cn/app/wind-dodge/id998223255?mt=8");
+		Application.OpenURL ("https://itunes.apple.com/cn/app/smash-chick/id1019371350?mt=8");
 	}
 }

@@ -40,7 +40,7 @@ namespace GoogleMobileAds.Common
         }
 
         public bool IsLoaded() {
-            Debug.Log("Dummy IsLoaded");
+//            Debug.Log("Dummy IsLoaded");
             return true;
         }
 

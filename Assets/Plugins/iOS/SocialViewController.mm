@@ -3,37 +3,34 @@
 #import <Social/Social.h>
 
 extern "C" {
-    int shareWithFacebook(const char *title, const char *message, const char *image);
-    int shareWithTwitter(const char *title, const char *message, const char *image);
+    int shareWithFacebook(const char *title, const char *message);
+    int shareWithTwitter(const char *title, const char *message);
 }
 
-int shareWithFacebook(const char *title, const char *message, const char *image)
+int shareWithFacebook(const char *title, const char *message)
 {
     SocialViewController *social = [[SocialViewController alloc] init];
     [social shareWithFacebook: [NSString stringWithUTF8String:title]
-                      message:[NSString stringWithUTF8String:message]
-                        image:[NSString stringWithUTF8String:image]];
+                      message:[NSString stringWithUTF8String:message]];
     return (0);
 }
 
-int shareWithTwitter(const char *title, const char *message, const char *image)
+int shareWithTwitter(const char *title, const char *message)
 {
     SocialViewController *social = [[SocialViewController alloc] init];
     [social shareWithTwitter: [NSString stringWithUTF8String:title]
-                     message:[NSString stringWithUTF8String:message]
-                       image:[NSString stringWithUTF8String:image]];
+                     message:[NSString stringWithUTF8String:message]];
     return (0);
 }
 
 
 @implementation SocialViewController
 #pragma mark - Action Methods
-- (int) shareWithFacebook: (NSString *)title message:(NSString *)message image:(NSString *)image{
+- (int) shareWithFacebook: (NSString *)title message:(NSString *)message{
     printf("sharewithfacebook inside");
     if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         [controller setInitialText:message];
-        [controller addImage:[UIImage imageNamed:image]];
         UIViewController *current = [self getCurrentVC];
         [current presentViewController:controller animated:YES completion:Nil];
     }
@@ -41,12 +38,11 @@ int shareWithTwitter(const char *title, const char *message, const char *image)
     return(0);
 }
 
-- (int) shareWithTwitter: (NSString *)title message:(NSString *)message image:(NSString *)image{
+- (int) shareWithTwitter: (NSString *)title message:(NSString *)message{
     if([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
         
         [controller setInitialText:message];
-        [controller addImage:[UIImage imageNamed:image]];
         
         UIViewController *current = [self getCurrentVC];
         [current presentViewController:controller animated:YES completion:Nil];

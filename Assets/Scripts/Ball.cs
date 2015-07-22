@@ -64,6 +64,8 @@ public class Ball : MonoBehaviour {
 					mGameController.GetComponent<GameController> ().GameOver ();
 					mNoUI.GetComponent<Animator>().Play("GameElementVibrate", -1, 0);
 					mCrashSound.GetComponent<AudioSource>().Play();
+				} else {
+					gameObject.SetActive(false);
 				}
 			}
 		} else if (mState == 2) {
@@ -99,8 +101,8 @@ public class Ball : MonoBehaviour {
 				float y = mLeftSquare.anchoredPosition.y + mLeftSquare.rect.yMin - rt.rect.yMax;
 				rt.anchoredPosition = new Vector2(0, y - 0.01f); // minus 0.01f to ignore float deviation
 				mState = 2;
-				mCrashParticle.gameObject.SetActive (true);
-				mCrashParticle.Play ();
+//				mCrashParticle.gameObject.SetActive (true);
+//				mCrashParticle.Play ();
 				ret = true;
 			}
 		}
@@ -143,8 +145,9 @@ public class Ball : MonoBehaviour {
 			BombBomb();
 			GetComponent<Image>().color = Vector4.zero;
 			mBombParticle.gameObject.SetActive(false);
+			mGameController.GetComponent<GameController> ().GameOver ();
 		}
-		mGameController.GetComponent<GameController> ().GameOver ();
+
 	}
 
 	public void SetIsBomb(bool bomb) {
@@ -161,7 +164,6 @@ public class Ball : MonoBehaviour {
 		if (r < 0.25f) {
 			mChickType = 0;
 			Game.yellow++;
-			print ("yellow " + Game.yellow);
 
 		} else if (r < 0.5f) {
 			mChickType = 1;

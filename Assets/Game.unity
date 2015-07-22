@@ -264,7 +264,7 @@ RectTransform:
   - {fileID: 187975672}
   - {fileID: 975961881}
   m_Father: {fileID: 438093453}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 3.05175781e-05, y: 0}
@@ -497,6 +497,7 @@ GameObject:
   - 224: {fileID: 317703977}
   - 222: {fileID: 317703979}
   - 114: {fileID: 317703978}
+  - 114: {fileID: 317703980}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -549,6 +550,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 317703976}
+--- !u!114 &317703980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 317703976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e51d25bec3e254a9081af8e3bfea4c4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mBackGround: {fileID: 413519536}
 --- !u!1 &323542745
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,7 +902,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22428666, guid: 5912a7f4dc5ff47dcab006a6a5933d21, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22428666, guid: 5912a7f4dc5ff47dcab006a6a5933d21, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -1096,7 +1109,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 985310909}
-  m_Father: {fileID: 438093453}
+  m_Father: {fileID: 979798139}
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
@@ -1145,8 +1158,8 @@ MonoBehaviour:
   - {r: .886274517, g: .643137276, b: .290196091, a: 1}
   - {r: .243137255, g: .752941191, b: .650980413, a: 1}
   - {r: .898039222, g: .235294119, b: .360784322, a: 1}
-  - {r: .725490212, g: .36470589, b: .749019623, a: 1}
-  - {r: .360784322, g: .70588237, b: .290196091, a: 1}
+  - {r: .917647064, g: .384313732, b: .823529422, a: 1}
+  - {r: .454901963, g: .313725501, b: .650980413, a: 1}
   - {r: .168627456, g: .576470613, b: .764705896, a: 1}
 --- !u!1 &438093452
 GameObject:
@@ -1174,13 +1187,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 413519536}
   - {fileID: 1915367508}
   - {fileID: 596243047}
   - {fileID: 1047187644}
   - {fileID: 176938941}
   m_Father: {fileID: 979798139}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -1516,7 +1528,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 438093453}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: -900.000122}
@@ -1550,15 +1562,15 @@ MonoBehaviour:
   mInterval: 1
   mBombChance: .300000012
   mSpeed: 500
-  mMinSpeed: 1200
-  mMaxSpeed: 1600
+  mMinSpeed: 1100
+  mMaxSpeed: 1500
   mMinWaveTime: 0
   mMaxWaveTime: 0
   mMinBallsPerWave: 1
   mMaxBallsPerWave: 5
   mIntervalBetweenWaves: 3
-  mMinIntervalBetweenBalls: .5
-  mMaxIntervalBetweenBalls: 2
+  mMinIntervalBetweenBalls: .349999994
+  mMaxIntervalBetweenBalls: 1.79999995
   mWaveToLoseHeight1: 10
   mWaveToLoseHeight2: 20
   mWaveToLoseHeight3: 30
@@ -2489,6 +2501,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 413519536}
   - {fileID: 438093453}
   - {fileID: 1116101758}
   - {fileID: 1376495453}
@@ -2600,7 +2613,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 438093453}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 3.05175781e-05, y: 0}
@@ -2835,7 +2848,7 @@ RectTransform:
   - {fileID: 1648670586}
   - {fileID: 354886107}
   m_Father: {fileID: 979798139}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 1080, y: 0}
@@ -3334,7 +3347,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 979798139}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -346, y: -812}
@@ -4203,6 +4216,7 @@ MonoBehaviour:
   mGameController: {fileID: 1136803102}
   mBallsEmitter: {fileID: 596243047}
   mPageSound: {fileID: 1819544498}
+  mGoogleAds: {fileID: 1168979229}
 --- !u!1 &1797606618
 GameObject:
   m_ObjectHideFlags: 0
